@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class CompanyRepository {
@@ -45,5 +46,20 @@ public class CompanyRepository {
 
     public List<Employee> getCompanyEmployeesByID(int id) {
         return getCompanyByID(id).getEmployees();
+    }
+
+    public List<Company> getCompaniesByPage(int page, int pageSize) {
+        return companyRepository.stream()
+                .skip((page - 1) * pageSize).limit(pageSize).collect(Collectors.toList());
+    }
+
+    public Company addCompany(Company company) {
+        company.setId(generateId());
+        companyRepository.add(company);
+        return company;
+    }
+
+    private int generateId() {
+        return companyRepository.stream().mapToInt(company -> company.getId()).max().orElse(0) + 1;
     }
 }

@@ -1,10 +1,8 @@
 package com.rest.springbootemployee;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +25,16 @@ public class CompanyController {
     @GetMapping("/{id}/employees")
     public List<Employee> getCompanyEmployeesByCompanyId(@PathVariable int id){
         return companyRepository.getCompanyEmployeesByID(id);
+    }
+
+    @GetMapping(params = {"page","pageSize"})
+    public List<Company> getCompaniesByPage(int page, int pageSize){
+        return companyRepository.getCompaniesByPage(page, pageSize);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Company addCompany(@RequestBody Company company){
+        return companyRepository.addCompany(company);
     }
 }
