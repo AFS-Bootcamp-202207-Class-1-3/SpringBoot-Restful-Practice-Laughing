@@ -68,4 +68,8 @@ public class CompanyRepository {
         updateCompany.merge(company);
         return updateCompany;
     }
+
+    public void deleteCompany(int id) {
+        companyRepository = companyRepository.stream().filter(company -> company.getId() != id).collect(Collectors.toList());
+    }
 }

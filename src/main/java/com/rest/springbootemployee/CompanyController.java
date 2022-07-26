@@ -42,4 +42,9 @@ public class CompanyController {
     public Company updateCompany(@PathVariable int id, @RequestBody Company company){
         return companyRepository.updateCompany(id,company);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteCompany(@PathVariable int id){
+        companyRepository.deleteCompany(id);
+    }
 }
