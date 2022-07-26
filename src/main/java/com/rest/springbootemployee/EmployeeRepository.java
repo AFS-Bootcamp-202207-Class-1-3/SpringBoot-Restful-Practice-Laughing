@@ -29,7 +29,7 @@ public class EmployeeRepository {
     }
 
     public Employee findById(int id) {
-        return employeeRepository.stream().filter(employee -> employee.getId()==id).findFirst().get();
+        return employeeRepository.stream().filter(employee -> employee.getId()==id).findFirst().orElseThrow(()->new EmployeeNotFoundException());
     }
 
     public List<Employee> getEmployeesByGender(String gender){
