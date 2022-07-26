@@ -12,27 +12,27 @@ public class EmployeeRepository {
     List<Employee> employeeRepository;
 
     public EmployeeRepository() {
-        employeeRepository=new ArrayList<Employee>(){
-           {
-               add(new Employee(1,"Kendrick", 22, "male", 20000));
-               add(new Employee(2,"Kendrick", 22, "male", 20000));
-               add(new Employee(3,"Kendrick", 22, "female", 20000));
-               add(new Employee(4,"Kendrick", 22, "male", 50000));
-               add(new Employee(5,"Kendrick", 22, "female", 30000));
-               add(new Employee(6,"Kendrick", 22, "male", 20000));
+        employeeRepository = new ArrayList<Employee>() {
+            {
+                add(new Employee(1, "Kendrick", 22, "male", 20000));
+                add(new Employee(2, "Kendrick", 22, "male", 20000));
+                add(new Employee(3, "Kendrick", 22, "female", 20000));
+                add(new Employee(4, "Kendrick", 22, "male", 50000));
+                add(new Employee(5, "Kendrick", 22, "female", 30000));
+                add(new Employee(6, "Kendrick", 22, "male", 20000));
             }
         };
     }
 
-    public List<Employee> getAllEmployee(){
+    public List<Employee> getAllEmployee() {
         return employeeRepository;
     }
 
     public Employee findById(int id) {
-        return employeeRepository.stream().filter(employee -> employee.getId()==id).findFirst().orElseThrow(()->new EmployeeNotFoundException());
+        return employeeRepository.stream().filter(employee -> employee.getId() == id).findFirst().orElseThrow(() -> new EmployeeNotFoundException());
     }
 
-    public List<Employee> getEmployeesByGender(String gender){
+    public List<Employee> getEmployeesByGender(String gender) {
         return employeeRepository.stream().filter(employee -> employee.getGender().equals(gender)).collect(Collectors.toList());
     }
 
@@ -42,19 +42,23 @@ public class EmployeeRepository {
         return employee;
     }
 
-    private int generateMaxId(){
-       return employeeRepository.stream().mapToInt(employee->employee.getId()).max().orElse(0)+1;
+    private int generateMaxId() {
+        return employeeRepository.stream().mapToInt(employee -> employee.getId()).max().orElse(0) + 1;
     }
 
 
     public List<Employee> getEmployeeByPage(int page, int pageSize) {
         return employeeRepository.stream()
-                .skip((page-1)*pageSize).limit(pageSize).collect(Collectors.toList());
+                .skip((page - 1) * pageSize).limit(pageSize).collect(Collectors.toList());
     }
 
-    public Employee updateEmployee(int id, Employee employee){
-        Employee updateEmployee=this.findById(id);
+    public Employee updateEmployee(int id, Employee employee) {
+        Employee updateEmployee = this.findById(id);
         updateEmployee.merge(employee);
         return updateEmployee;
+    }
+
+    public void deleteEmployee(int id) {
+        employeeRepository = employeeRepository.stream().filter(employee -> employee.getId() != id).collect(Collectors.toList());
     }
 }

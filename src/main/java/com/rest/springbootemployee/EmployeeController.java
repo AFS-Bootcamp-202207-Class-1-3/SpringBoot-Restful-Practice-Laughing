@@ -43,4 +43,9 @@ public class EmployeeController {
     public Employee updateEmployee(@PathVariable int id, @RequestBody Employee employee){
         return employeeRepository.updateEmployee(id,employee);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteEmployee(@PathVariable int id){
+        employeeRepository.deleteEmployee(id);
+    }
 }
