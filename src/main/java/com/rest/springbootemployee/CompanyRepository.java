@@ -62,4 +62,10 @@ public class CompanyRepository {
     private int generateId() {
         return companyRepository.stream().mapToInt(company -> company.getId()).max().orElse(0) + 1;
     }
+
+    public Company updateCompany(int id, Company company) {
+        Company updateCompany=getCompanyByID(id);
+        updateCompany.merge(company);
+        return updateCompany;
+    }
 }

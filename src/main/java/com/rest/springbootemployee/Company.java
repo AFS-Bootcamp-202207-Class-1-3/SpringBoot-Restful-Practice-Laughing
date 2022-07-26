@@ -36,4 +36,9 @@ public class Company {
         this.name = name;
         this.employees = employees;
     }
+
+    public void merge(Company company) {
+        this.name=company.name;
+        this.employees=company.employees;
+    }
 }
