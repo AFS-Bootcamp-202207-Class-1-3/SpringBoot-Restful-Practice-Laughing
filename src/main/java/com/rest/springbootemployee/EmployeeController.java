@@ -29,7 +29,6 @@ public class EmployeeController {
 
     @PostMapping
     public Employee addAEmployee(@RequestBody Employee employee){
-        employeeRepository.addAEmployee(employee);
-        return employee;
+        return employeeRepository.addAEmployee(employee);
     }
 }

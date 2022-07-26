@@ -36,7 +36,15 @@ public class EmployeeRepository {
         return employeeRepository.stream().filter(employee -> employee.getGender().equals(gender)).collect(Collectors.toList());
     }
 
-    public void addAEmployee(Employee employee) {
+    public Employee addAEmployee(Employee employee) {
+        employee.setId(generateMaxId());
         employeeRepository.add(employee);
+        return employee;
     }
+
+    private int generateMaxId(){
+       return employeeRepository.stream().mapToInt(employee->employee.getId()).max().orElse(0)+1;
+    }
+
+
 }
