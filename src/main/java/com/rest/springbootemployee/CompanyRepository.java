@@ -38,4 +38,8 @@ public class CompanyRepository {
     public List<Company> getAllCompanies() {
         return companyRepository;
     }
+
+    public Company getCompanyByID(int id) {
+        return companyRepository.stream().filter(company -> company.getId()==id).findFirst().get();
+    }
 }
