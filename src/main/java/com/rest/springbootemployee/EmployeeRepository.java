@@ -51,4 +51,10 @@ public class EmployeeRepository {
         return employeeRepository.stream()
                 .skip((page-1)*pageSize).limit(pageSize).collect(Collectors.toList());
     }
+
+    public Employee updateEmployee(int id, Employee employee){
+        Employee updateEmployee=this.findById(id);
+        updateEmployee.merge(employee);
+        return updateEmployee;
+    }
 }

@@ -55,4 +55,10 @@ class Employee{
         this.gender = gender;
         this.salary = salary;
     }
+
+    public void merge(Employee employee) {
+        this.name=employee.getName();
+        this.age=employee.getAge();
+        this.gender=employee.getGender();
+    }
 }

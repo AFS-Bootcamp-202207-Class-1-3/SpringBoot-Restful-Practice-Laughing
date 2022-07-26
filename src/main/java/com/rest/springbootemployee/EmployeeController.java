@@ -1,6 +1,7 @@
 package com.rest.springbootemployee;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public class EmployeeController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Employee addAEmployee(@RequestBody Employee employee){
         return employeeRepository.addAEmployee(employee);
     }
@@ -35,5 +37,10 @@ public class EmployeeController {
     @GetMapping(params = {"page","pageSize"})
     public List<Employee> getEmployeesByPage(int page, int pageSize){
         return employeeRepository.getEmployeeByPage(page, pageSize);
+    }
+
+    @PutMapping("/{id}")
+    public Employee updateEmployee(@PathVariable int id, @RequestBody Employee employee){
+        return employeeRepository.updateEmployee(id,employee);
     }
 }
