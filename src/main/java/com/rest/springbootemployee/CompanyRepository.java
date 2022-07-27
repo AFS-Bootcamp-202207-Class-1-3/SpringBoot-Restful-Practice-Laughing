@@ -41,7 +41,9 @@ public class CompanyRepository {
     }
 
     public Company getCompanyByID(int id) {
-        return companyRepository.stream().filter(company -> company.getId()==id).findFirst().get();
+        return companyRepository.stream().
+                filter(company -> company.getId()==id).
+                findFirst().get();
     }
 
     public List<Employee> getCompanyEmployeesByID(int id) {
@@ -50,7 +52,8 @@ public class CompanyRepository {
 
     public List<Company> getCompaniesByPage(int page, int pageSize) {
         return companyRepository.stream()
-                .skip((page - 1) * pageSize).limit(pageSize).collect(Collectors.toList());
+                .skip((page - 1) * pageSize).
+                limit(pageSize).collect(Collectors.toList());
     }
 
     public Company addCompany(Company company) {
