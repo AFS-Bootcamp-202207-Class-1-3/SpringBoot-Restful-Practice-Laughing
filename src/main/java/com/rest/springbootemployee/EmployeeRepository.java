@@ -59,6 +59,7 @@ public class EmployeeRepository {
     }
 
     public void deleteEmployee(int id) {
-        employeeRepository = employeeRepository.stream().filter(employee -> employee.getId() != id).collect(Collectors.toList());
+        Employee employee=findById(id);
+        employeeRepository.remove(employee);
     }
 }

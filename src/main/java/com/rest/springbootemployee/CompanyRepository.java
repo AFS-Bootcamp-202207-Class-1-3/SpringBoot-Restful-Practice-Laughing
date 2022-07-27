@@ -60,7 +60,9 @@ public class CompanyRepository {
     }
 
     private int generateId() {
-        return companyRepository.stream().mapToInt(company -> company.getId()).max().orElse(0) + 1;
+        return companyRepository.stream()
+                .mapToInt(company -> company.getId())
+                .max().orElse(0) + 1;
     }
 
     public Company updateCompany(int id, Company company) {
@@ -70,6 +72,7 @@ public class CompanyRepository {
     }
 
     public void deleteCompany(int id) {
-        companyRepository = companyRepository.stream().filter(company -> company.getId() != id).collect(Collectors.toList());
+       Company company=getCompanyByID(id);
+       companyRepository.remove(company);
     }
 }
